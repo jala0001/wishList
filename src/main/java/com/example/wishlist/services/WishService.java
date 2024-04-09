@@ -21,8 +21,8 @@ private WishRepository wishRepository;
     return wishRepository.getUser(id);
     }
 
-    public void addUser(String username, String userEmail) {
-        wishRepository.addUser(username, userEmail);
+    public void addUser(String username, String userEmail, String password) {
+        wishRepository.addUser(username, userEmail, password);
     }
 
 

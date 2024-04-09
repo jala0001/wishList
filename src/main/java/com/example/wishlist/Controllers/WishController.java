@@ -1,5 +1,6 @@
 package com.example.wishlist.Controllers;
 
+import com.example.wishlist.models.User;
 import com.example.wishlist.services.WishService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,10 +20,28 @@ public class WishController {
 }
 
 @PostMapping("/addUser")
-    public String addUser(@RequestParam String username, @RequestParam String userEmail) {
-    wishService.addUser(username, userEmail);
+    public String addUser(@RequestParam String username, @RequestParam String userEmail,
+                          @RequestParam String password) {
+    wishService.addUser(username, userEmail, password);
     return "redirect:/";
 }
+@GetMapping("/verifyPassword")
+public String verifyPassword(@RequestParam int id, Model model) {
+model.addAttribute(wishService.getUser(id));
+return "home/verifyPassword";
+}
+
+    @PostMapping("/verifyPassword")
+    public String verifyPassword(@RequestParam String password, @RequestParam int id) {
+        User user = wishService.getUser(id);
+        if (user.getPassword().equals(password)) {
+            // Redirect til /userWishList med id som query parameter
+            return "redirect:/userWishList?id=" + id;
+        } else {
+            return "home/index";
+        }
+    }
+
 
 @GetMapping("/userWishList")
     public String pickUser(@RequestParam int id, Model model) {

@@ -23,7 +23,7 @@
         <td th:text="${user.userId}"></td>
         <td th:text="${user.username}"></td>
         <td>
-            <form action="/userWishList" method="get">
+            <form action="/verifyPassword" method="get">
                 <input type="hidden" name="id" th:value="${user.userId}">
                 <button type="submit">Pick user</button>
             </form>

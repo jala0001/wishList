@@ -26,10 +26,10 @@ public class WishRepository {
         return jdbcTemplate.queryForObject(query, rowMapper, id);
     }
 
-    public void addUser(String username, String userEmail) {
-    String query = "insert into user(username, user_email)" +
-        "values(?, ?);";
-    jdbcTemplate.update(query, username, userEmail);
+    public void addUser(String username, String userEmail, String password) {
+    String query = "insert into user(username, user_email, password)" +
+        "values(?, ?, ?);";
+    jdbcTemplate.update(query, username, userEmail, password);
     }
 
 
