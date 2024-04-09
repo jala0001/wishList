@@ -31,19 +31,22 @@ model.addAttribute(wishService.getUser(id));
 return "home/verifyPassword";
 }
 
-    @PostMapping("/verifyPassword")
-    public String verifyPassword(@RequestParam String password, @RequestParam int id) {
+    @PostMapping("/verifyPasswordAction")
+    public String verifyPassword(@RequestParam String password, @RequestParam int id, Model model) {
         User user = wishService.getUser(id);
         if (user.getPassword().equals(password)) {
             // Redirect til /userWishList med id som query parameter
             return "redirect:/userWishList?id=" + id;
         } else {
-            return "home/index";
+            model.addAttribute(wishService.getUser(id));
+            model.addAttribute("error", "forkert adgangskode");
+            return "home/verifyPassword"; // Her ændres redirect til at vise samme side med fejlbeskeden
         }
     }
 
 
-@GetMapping("/userWishList")
+
+    @GetMapping("/userWishList")
     public String pickUser(@RequestParam int id, Model model) {
     model.addAttribute(wishService.getUser(id));
     return "home/wishList";
