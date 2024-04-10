@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class WishListService {
+public class UserService {
     @Autowired
     private com.example.wishlist.Repositories.UserRepository userRepository;
 
@@ -18,7 +18,7 @@ public class WishListService {
         return userRepository.getUser(id);
     }
 
-    public void addUser(String username, String userEmail) {
-        userRepository.addUser(username, userEmail);
+    public void addUser(String username, String userEmail, String password) {
+        userRepository.addUser(username, userEmail, password);
     }
 }
