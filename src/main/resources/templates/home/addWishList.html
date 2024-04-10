@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>add wishlist</title>
+</head>
+<body>
+<h1>Create a new wishlist!</h1>
+    <form action="/addWishListAction" method="post">
+        <td>Header</td><td><input type="text" name="header"></td>
+        <input type="hidden" name="id" th:value="${user.userId}">
+        <button type="submit">Submit!</button>
+    </form>
+
+
+</body>
+</html>

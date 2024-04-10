@@ -40,4 +40,14 @@ public class UserRepository {
     }
 
 
+    public void addWishList(String header, int id) {
+        String query = "insert into wishlist(user_id, wish_list_header)" +
+                "values(?, ?);";
+        jdbcTemplate.update(query, id, header);
+    }
+
+    public void deleteUser(int wishlistId) {
+        String query = "delete from wishlist where wish_list_id = ?;";
+        jdbcTemplate.update(query, wishlistId);
+    }
 }

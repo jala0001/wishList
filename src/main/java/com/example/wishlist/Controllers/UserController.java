@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 public class UserController {
     @Autowired
@@ -48,5 +51,29 @@ public class UserController {
         model.addAttribute(userService.getUser(id));
         model.addAttribute("wishLists", userService.getWishLists(id));
         return "home/wishList";
+    }
+
+    @GetMapping("/addWishList")
+    public String addWishList(@RequestParam int id, Model model) {
+        model.addAttribute(userService.getUser(id));
+        return "home/addWishList";
+    }
+
+    @PostMapping("/addWishListAction")
+    public String addWishListAction(@RequestParam String header, @RequestParam int id) {
+        userService.addWishList(header, id);
+        return "redirect:/userWishList?id=" + id;
+    }
+
+    @GetMapping("/chooseWishList")
+    public String chooseWishList() {
+        // todo lav chosenWishList.html      todo Lav Model model og tilhørende logik
+        return "home/chosenWishList";
+    }
+
+    @PostMapping("/deleteWishList")
+    public String deleteWishList(@RequestParam int wishlistId, @RequestParam int id) {
+        userService.deleteUser(wishlistId);
+       return "redirect:/userWishList?id=" + id;
     }
 }

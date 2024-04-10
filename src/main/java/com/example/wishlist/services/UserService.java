@@ -1,6 +1,8 @@
 package com.example.wishlist.services;
 
+import com.example.wishlist.models.User;
 import com.example.wishlist.models.WishList;
+import com.example.wishlist.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,16 +11,16 @@ import java.util.List;
 @Service
 public class UserService {
     @Autowired
-    private com.example.wishlist.repositories.UserRepository userRepository;
+    private UserRepository userRepository;
 
-    public List<com.example.wishlist.models.User> getUsers() {
+    public List<User> getUsers() {
         return userRepository.getUsers();
     }
     public List<WishList> getWishLists(int id) {
         return userRepository.getWishLists(id);
     }
 
-    public com.example.wishlist.models.User getUser(int id) {
+    public User getUser(int id) {
         return userRepository.getUser(id);
     }
 
@@ -27,4 +29,11 @@ public class UserService {
     }
 
 
+    public void addWishList(String header, int id) {
+        userRepository.addWishList(header, id);
+    }
+
+    public void deleteUser(int wishlistId) {
+        userRepository.deleteUser(wishlistId);
+    }
 }
