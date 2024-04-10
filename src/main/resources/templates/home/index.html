@@ -3,9 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <title>index</title>
+    <style>
+        body {
+            background-color: skyblue;
+        }
+    </style>
 </head>
 <body>
-<h1>Hej index</h1>
+<h1>Log in</h1>
+
+<form action="/addUser" method="get">
+    <button type="submit">Create new user</button>
+</form>
+
+<hr>
+<table>
+    <thead><td>id</td><td>username</td></thead>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.userId}"></td>
+        <td th:text="${user.username}"></td>
+        <td>
+            <form action="/userWishList" method="get">
+                <input type="hidden" name="id" th:value="${user.userId}">
+                <button type="submit">Pick user</button>
+            </form>
+        </td>
+    </tr>
+</table>
 
 </body>
 </html>
