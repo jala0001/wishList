@@ -7,7 +7,19 @@
 <body>
 <h1><td th:text="${user.username} + '\'s wish lists!'"></td></h1>
 
-
+<h2>Your wishlists!</h2>
+<table>
+    <thead><td>Wishlist nr</td><td>Header</td></thead>
+    <tr th:each="wishList : ${wishLists}">
+        <td th:text="${wishList.wishListId}"></td>
+        <td th:text="${wishList.wishListHeader}"></td>
+        <td th:if="${wishLists != null}">
+            <form action="/vælgsti" method="get">
+                <button type="submit">Choose this wishlist!</button>
+            </form>
+        </td>
+    </tr>
+</table>
 
 </body>
 </html>

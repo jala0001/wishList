@@ -1,5 +1,7 @@
 package com.example.wishlist.repositories;
 
+import com.example.wishlist.models.User;
+import com.example.wishlist.models.WishList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -14,16 +16,21 @@ public class UserRepository {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-    public List<com.example.wishlist.models.User> getUsers() {
+    public List<User> getUsers() {
         String query = "select * from User;";
-        RowMapper rowMapper = new BeanPropertyRowMapper(com.example.wishlist.models.User.class);
+        RowMapper rowMapper = new BeanPropertyRowMapper(User.class);
         return jdbcTemplate.query(query, rowMapper);
     }
 
-    public com.example.wishlist.models.User getUser(int id) {
+    public User getUser(int id) {
         String query = "Select * from user where user_id = ?;";
-        RowMapper<com.example.wishlist.models.User> rowMapper = new BeanPropertyRowMapper<>(com.example.wishlist.models.User.class);
+        RowMapper<User> rowMapper = new BeanPropertyRowMapper<>(User.class);
         return jdbcTemplate.queryForObject(query, rowMapper, id);
+    }
+    public List<WishList> getWishLists(int id) {
+        String query = "select * from wishlist where user_id = ?;";
+        RowMapper rowMapper = new BeanPropertyRowMapper(WishList.class);
+        return jdbcTemplate.query(query, rowMapper, id);
     }
 
     public void addUser(String username, String userEmail, String password) {
@@ -31,4 +38,6 @@ public class UserRepository {
                 "values(?, ?, ?);";
         jdbcTemplate.update(query, username, userEmail, password);
     }
+
+
 }

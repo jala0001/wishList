@@ -1,5 +1,6 @@
 package com.example.wishlist.services;
 
+import com.example.wishlist.models.WishList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,9 @@ public class UserService {
     public List<com.example.wishlist.models.User> getUsers() {
         return userRepository.getUsers();
     }
+    public List<WishList> getWishLists(int id) {
+        return userRepository.getWishLists(id);
+    }
 
     public com.example.wishlist.models.User getUser(int id) {
         return userRepository.getUser(id);
@@ -21,4 +25,6 @@ public class UserService {
     public void addUser(String username, String userEmail, String password) {
         userRepository.addUser(username, userEmail, password);
     }
+
+
 }

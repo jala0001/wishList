@@ -46,6 +46,7 @@ public class UserController {
     @GetMapping("/userWishList")
     public String pickUser(@RequestParam int id, Model model) {
         model.addAttribute(userService.getUser(id));
+        model.addAttribute("wishLists", userService.getWishLists(id));
         return "home/wishList";
     }
 }
