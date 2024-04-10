@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class UserController {
     @Autowired
-    private com.example.wishlist.Services.UserService userService;
+    private com.example.wishlist.services.UserService userService;
 
     @GetMapping("/addUser")
     public String addUser() {

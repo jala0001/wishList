@@ -1,4 +1,4 @@
-package com.example.wishlist.Repositories;
+package com.example.wishlist.repositories;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
