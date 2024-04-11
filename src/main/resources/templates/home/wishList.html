@@ -3,8 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <title>Wish list</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
+<<<<<<< HEAD
 <h1><td th:text="${user.username} + '\'s wish lists!'"></td></h1>
 <form action="/wishlistAdd" method="get">
     <button type="submit">
@@ -12,6 +49,40 @@
     </button>
 </form>
 
+=======
+<h1><span th:text="${user.username}"></span>'s profile!</h1>
+>>>>>>> 690cedcca7659d2a2caae21a832633422f72be2f
 
+<h2>Your wishlists!</h2>
+<form action="/addWishList" method="get">
+    <input type="hidden" name="id" th:value="${user.userId}">
+    <button type="submit">Add a new wishlist!</button>
+</form>
+<table>
+    <thead>
+    <tr>
+        <td>Header</td>
+        <td>Chose wishlist</td>
+        <td>Delete wishlist</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="wishList : ${wishLists}">
+        <td th:text="${wishList.wishListHeader}"></td>
+        <td th:if="${wishLists != null}">
+            <form action="/chooseWishList" method="get">
+                <button type="submit">Choose this wishlist!</button>
+            </form>
+        </td>
+        <td th:if="${wishLists != null}">
+            <form action="deleteWishList" method="post">
+                <input type="hidden" name="wishlistId" th:value="${wishList.wishListId}">
+                <input type="hidden" name="id" th:value="${user.userId}">
+                <button type="submit">Delete this wishlist</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>
