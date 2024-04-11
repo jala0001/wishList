@@ -48,4 +48,5 @@ public class UserController {
         model.addAttribute(userService.getUser(id));
         return "home/wishList";
     }
+
 }

@@ -21,4 +21,5 @@ public class UserService {
     public void addUser(String username, String userEmail, String password) {
         userRepository.addUser(username, userEmail, password);
     }
+
 }

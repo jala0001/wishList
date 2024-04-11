@@ -1,10 +1,22 @@
 <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>wish</title>
 </head>
 <body>
-$END$
+<h1>Wish List</h1>
+<form action="/wishlist/add" method="post">
+<label> Title: </label>
+<input type="text" name="title"><br>
+<label>Link:</label>
+<input type="text" name="link"><br>
+<label>Note:</label>
+<input type="text" name="note"><br>
+    <button type="submit"> Add to wish list</button>
+</form>
+
 </body>
 </html>
