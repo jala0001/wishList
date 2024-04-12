@@ -2,7 +2,7 @@ package com.example.wishlist.models;
 
 public class Wish {
     private int wishId;
-    private int userId;
+    private int wishlistId; // DENNE ER ÆNDRET FRA userId for at matche ændringen i SQL
     private String wishHeader;
     private String wishLink;
     private double wishPrice;
@@ -20,12 +20,12 @@ public class Wish {
         this.wishId = wishId;
     }
 
-    public int getUserId() {
-        return userId;
+    public int getWishlistId() {
+        return wishlistId;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setWishlistId(int wishlistId) {
+        this.wishlistId = wishlistId;
     }
 
     public String getWishHeader() {

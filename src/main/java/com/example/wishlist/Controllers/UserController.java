@@ -66,8 +66,9 @@ public class UserController {
     }
 
     @GetMapping("/chooseWishList")
-    public String chooseWishList() {
-        // todo lav chosenWishList.html      todo Lav Model model og tilhørende logik
+    public String chooseWishList(@RequestParam int wishlistId, Model model) {
+        model.addAttribute(userService.getWishList(wishlistId)); // netop tilføjet
+        model.addAttribute("wishes", userService.getWishes(wishlistId)); // netop tilføjet
         return "home/chosenWishList";
     }
 
@@ -75,5 +76,25 @@ public class UserController {
     public String deleteWishList(@RequestParam int wishlistId, @RequestParam int id) {
         userService.deleteUser(wishlistId);
        return "redirect:/userWishList?id=" + id;
+    }
+
+    @PostMapping("/deleteWish")
+    public String deleteWish(@RequestParam int wishId, int wishlistId) {
+        userService.deleteWish(wishId);
+        return "redirect:/chooseWishList?wishlistId=" + wishlistId;
+    }
+
+    @GetMapping("/addWish")
+    public String addWish(@RequestParam int wishlistId, Model model) {
+        model.addAttribute(userService.getWishList(wishlistId));
+        return "home/addWish";
+    }
+
+    @PostMapping("/addWishAction")
+    public String addWish(@RequestParam String header, @RequestParam String link,
+                          @RequestParam double price, @RequestParam String note,
+                          @RequestParam int wishlistId) {
+    userService.addWish(header, link, price, note, wishlistId);
+    return "redirect:/chooseWishList?wishlistId=" + wishlistId;
     }
 }

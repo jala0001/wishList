@@ -1,6 +1,7 @@
 package com.example.wishlist.repositories;
 
 import com.example.wishlist.models.User;
+import com.example.wishlist.models.Wish;
 import com.example.wishlist.models.WishList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -27,10 +28,20 @@ public class UserRepository {
         RowMapper<User> rowMapper = new BeanPropertyRowMapper<>(User.class);
         return jdbcTemplate.queryForObject(query, rowMapper, id);
     }
+    public WishList getWishList(int wishlistId) {
+        String query = "select * from wishlist where wish_list_id = ?;";
+        RowMapper<WishList> rowMapper = new BeanPropertyRowMapper<>(WishList.class);
+        return jdbcTemplate.queryForObject(query, rowMapper, wishlistId); // netop tilføjet
+    }
     public List<WishList> getWishLists(int id) {
         String query = "select * from wishlist where user_id = ?;";
         RowMapper rowMapper = new BeanPropertyRowMapper(WishList.class);
         return jdbcTemplate.query(query, rowMapper, id);
+    }
+    public List<Wish> getWishes(int wishlistId) {
+        String query = "select * from wish where wishlist_id = ?;";
+        RowMapper rowMapper = new BeanPropertyRowMapper(Wish.class);
+        return jdbcTemplate.query(query, rowMapper, wishlistId); // netop tilføjet
     }
 
     public void addUser(String username, String userEmail, String password) {
@@ -46,8 +57,22 @@ public class UserRepository {
         jdbcTemplate.update(query, id, header);
     }
 
+    public void addWish(String header, String link, double price, String note, int wishlistId) {
+        String query = "insert into wish(wishlist_id, wish_header, wish_link, wish_price, wish_note)" +
+                "values(?, ?, ?, ?, ?);";
+        jdbcTemplate.update(query, wishlistId, header, link, price, note);
+    }
+
     public void deleteUser(int wishlistId) {
         String query = "delete from wishlist where wish_list_id = ?;";
         jdbcTemplate.update(query, wishlistId);
     }
+
+
+    public void deleteWish(int wishId) {
+        String query = "delete from wish where wish_id = ?;";
+        jdbcTemplate.update(query, wishId);
+    }
+
+
 }
