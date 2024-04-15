@@ -28,7 +28,6 @@ public class UserService {
         userRepository.addUser(username, userEmail, password);
     }
 
-
     public void addWishList(String header, int id) {
         userRepository.addWishList(header, id);
     }
