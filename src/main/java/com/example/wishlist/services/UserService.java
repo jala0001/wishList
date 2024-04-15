@@ -1,6 +1,7 @@
 package com.example.wishlist.services;
 
 import com.example.wishlist.models.User;
+import com.example.wishlist.models.Wish;
 import com.example.wishlist.models.WishList;
 import com.example.wishlist.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,5 +36,21 @@ public class UserService {
 
     public void deleteUser(int wishlistId) {
         userRepository.deleteUser(wishlistId);
+    }
+
+    public WishList getWishList(int wishlistId) {
+        return userRepository.getWishList(wishlistId);
+    }
+
+    public List<Wish> getWishes(int wishlistId) {
+        return userRepository.getWishes(wishlistId);
+    }
+
+    public void deleteWish(int wishId) {
+        userRepository.deleteWish(wishId);
+    }
+
+    public void addWish(String header, String link, double price, String note, int wishlistId) {
+        userRepository.addWish(header, link, price, note, wishlistId);
     }
 }
