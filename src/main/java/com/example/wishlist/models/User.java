@@ -1,12 +1,17 @@
 package com.example.wishlist.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class User {
     private int userId;
     private String username;
     private String userEmail;
     private String password;
+    private List<WishList> sharedWishLists;
 
     public User() {
+        sharedWishLists = new ArrayList<>();
 
     }
 

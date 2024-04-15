@@ -5,31 +5,123 @@
     <title>index</title>
     <style>
         body {
-            background-color: skyblue;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ecf0f5;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            max-width: 600px;
+            width: 90%;
+            padding: 40px;
+            background-color: #fff;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+            font-size: 36px;
+            color: #5dade2;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+        }
+
+        th, td {
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #aed6f1;
+            color: #fff;
+            font-weight: bold;
+            text-transform: uppercase;
+            border-radius: 10px 10px 0 0;
+        }
+
+        tr:hover {
+            background-color: #d6eaf8;
+        }
+
+        button {
+            padding: 12px 24px;
+            background-color: #5dade2;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #3498db;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #ddd;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+
+        input[type="submit"] {
+            padding: 12px 24px;
+            background-color: #85c1e9;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #5dade2;
         }
     </style>
 </head>
 <body>
-<h1>Log in</h1>
+<div class="container">
+    <h1>Log in</h1>
 
-<form action="/addUser" method="get">
-    <button type="submit">Create new user</button>
-</form>
+    <form action="/addUser" method="get">
+        <button type="submit">Create new user</button>
+    </form>
 
-<hr>
-<table>
-    <thead><td>id</td><td>username</td></thead>
-    <tr th:each="user : ${users}">
-        <td th:text="${user.userId}"></td>
-        <td th:text="${user.username}"></td>
-        <td>
-            <form action="/verifyPassword" method="get">
-                <input type="hidden" name="id" th:value="${user.userId}">
-                <button type="submit">Pick user</button>
-            </form>
-        </td>
-    </tr>
-</table>
+    <hr>
 
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.userId}"></td>
+            <td th:text="${user.username}"></td>
+            <td>
+                <form action="/verifyPassword" method="get">
+                    <input type="hidden" name="id" th:value="${user.userId}">
+                    <input type="submit" value="Pick user">
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>

@@ -39,11 +39,11 @@ public class UserService {
     }
 
     public WishList getWishList(int wishlistId) {
-        return userRepository.getWishList(wishlistId); // netop tilføjet
+        return userRepository.getWishList(wishlistId);
     }
 
     public List<Wish> getWishes(int wishlistId) {
-        return userRepository.getWishes(wishlistId); // netop tilføjet
+        return userRepository.getWishes(wishlistId);
     }
 
     public void deleteWish(int wishId) {

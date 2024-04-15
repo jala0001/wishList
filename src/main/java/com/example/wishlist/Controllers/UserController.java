@@ -75,7 +75,7 @@ public class UserController {
     @PostMapping("/deleteWishList")
     public String deleteWishList(@RequestParam int wishlistId, @RequestParam int id) {
         userService.deleteUser(wishlistId);
-       return "redirect:/userWishList?id=" + id;
+        return "redirect:/userWishList?id=" + id;
     }
 
     @PostMapping("/deleteWish")
@@ -94,7 +94,14 @@ public class UserController {
     public String addWish(@RequestParam String header, @RequestParam String link,
                           @RequestParam double price, @RequestParam String note,
                           @RequestParam int wishlistId) {
-    userService.addWish(header, link, price, note, wishlistId);
-    return "redirect:/chooseWishList?wishlistId=" + wishlistId;
+        userService.addWish(header, link, price, note, wishlistId);
+        return "redirect:/chooseWishList?wishlistId=" + wishlistId;
+    }
+
+    @GetMapping("/shareWishList")
+    public String shareWishList(@RequestParam int wishlistId, Model model) {
+        model.addAttribute(userService.getWishList(wishlistId));
+        model.addAttribute("users", userService.getUsers());
+        return "home/shareWishList";
     }
 }

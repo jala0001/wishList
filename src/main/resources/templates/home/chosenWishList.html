@@ -30,14 +30,14 @@
         }
         button {
             padding: 10px 20px;
-            background-color: #4CAF50;
+            background-color: #87CEEB;
             color: white;
             border: none;
             border-radius: 4px;
             cursor: pointer;
         }
         button:hover {
-            background-color: #45a049;
+            background-color: #00BFFF;
         }
     </style>
 </head>
@@ -46,6 +46,11 @@
 <form action="/addWish" method="get">
     <input type="hidden" name="wishlistId" th:value="${wishList.wishListId}">
     <button type="submit">Add wish!</button>
+</form>
+<br>
+<form action="/shareWishList" method="get">
+    <input type="hidden" name="wishlistId" th:value="${wishList.wishListId}">
+    <button type="submit">Share this wishlist with other users!</button>
 </form>
 <table>
     <thead>
@@ -79,5 +84,7 @@
     <input type="hidden" name="id" th:value="${wishList.userId}">
     <button type="submit">Go back to all your wishlists!</button>
 </form>
+
+
 </body>
 </html>
