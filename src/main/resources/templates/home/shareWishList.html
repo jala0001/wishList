@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>share</title>
+</head>
+<body>
+<h1>Share wishlist</h1>
+
+<table>
+    <thead><td>Users</td><td>Action</td></thead>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.username}"></td>
+        <td th:if="${users != null}">
+            <form action="/shareWishListAction" method="post">
+                <input type="hidden" name="wishlistId" th:value="${wishList.wishListId}">
+                <input type="hidden" name="username" th:value="${user.username}">
+                <button type="submit">Share with this user!</button>
+            </form>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>
