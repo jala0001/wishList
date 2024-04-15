@@ -1,28 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Chosen Wish List</title>
+    <title>Chosen Wish List!</title>
     <style>
-        body {
-            display: flex;
-            flex-direction: column;
+        body{
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            margin: 0;
         }
-        img {
-            max-width: 40%;
-            height: auto;
+        form{
+            background-color: mediumseagreen;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+        }
+        lable{
             display: block;
-            margin-bottom: 20px;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"]{
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        button [type="submit"]{
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button[type="submit"]:hover{
+            background-color: #0056b3;
+
         }
     </style>
 </head>
 <body>
-<h1>NOOT NOOT</h1>
-<img src="pingo.jpg" alt="En pingvin">
-
+<form action="/wishlistAdd" method="post">
+    <label> Title: </label>
+    <input type="text" name="title"><br>
+    <label>Link:</label>
+    <input type="text" name="link"><br>
+    <label>Note:</label>
+    <input type="text" name="note"><br>
+    <a th:href="${link}" target="_blank"></a>
+    <button type="submit"> Add to wish list</button>
+</form>
 </body>
 </html>

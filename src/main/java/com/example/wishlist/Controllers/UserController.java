@@ -53,8 +53,7 @@ public class UserController {
         return "home/wishList";
     }
 
-<<<<<<< HEAD
-=======
+
     @GetMapping("/addWishList")
     public String addWishList(@RequestParam int id, Model model) {
         model.addAttribute(userService.getUser(id));
@@ -78,5 +77,6 @@ public class UserController {
         userService.deleteUser(wishlistId);
        return "redirect:/userWishList?id=" + id;
     }
->>>>>>> 690cedcca7659d2a2caae21a832633422f72be2f
+
+
 }

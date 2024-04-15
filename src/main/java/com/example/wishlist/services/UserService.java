@@ -28,8 +28,7 @@ public class UserService {
         userRepository.addUser(username, userEmail, password);
     }
 
-<<<<<<< HEAD
-=======
+
 
     public void addWishList(String header, int id) {
         userRepository.addWishList(header, id);
@@ -38,5 +37,5 @@ public class UserService {
     public void deleteUser(int wishlistId) {
         userRepository.deleteUser(wishlistId);
     }
->>>>>>> 690cedcca7659d2a2caae21a832633422f72be2f
+
 }
