@@ -34,11 +34,6 @@ public class UserService {
         userRepository.addUser(username, userEmail, password);
     }
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 7d5d22e678c1e6f57bd97a0386679f762a0eddbb
     public void addWishList(String header, int id) {
         userRepository.addWishList(header, id);
     }

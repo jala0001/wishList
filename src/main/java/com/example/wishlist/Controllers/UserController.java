@@ -1,11 +1,10 @@
 package com.example.wishlist.Controllers;
 
 import com.example.wishlist.models.User;
-<<<<<<< HEAD
 import com.example.wishlist.repositories.UserRepository;
-=======
+
 import com.example.wishlist.models.WishList;
->>>>>>> 7d5d22e678c1e6f57bd97a0386679f762a0eddbb
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -121,7 +120,6 @@ public class UserController {
         model.addAttribute("users", userService.getUsers());
         return "home/shareWishList";
     }
-    private List<User> allUsers = new ArrayList<>();
 
 }
 
