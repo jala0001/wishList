@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 
 @Service
@@ -55,10 +57,31 @@ public class UserService {
         userRepository.deleteWish(wishId);
     }
 
-    public void addWish(String header, String link, double price, String note, int wishlistId) {
+    /* public void addWish(String header, String link, double price, String note, int wishlistId) {
         userRepository.addWish(header, link, price, note, wishlistId);
     }
+<<<<<<< HEAD
 
 
 }
 
+=======
+     */
+
+    public void addWish(String header, String link, double price, String note, int wishlistId) { // NYT EMILIA
+        if (isValidURL(link)) {
+            userRepository.addWish(header, link, price, note, wishlistId);
+        } else {
+            throw new IllegalArgumentException("Invalid URL: " + link);
+        }
+    }
+
+    public boolean isValidURL(String url) { // NYT EMILIA
+        try {
+            URI uri = new URI(url);
+            return uri != null && uri.getScheme() != null && uri.getHost() != null;
+        } catch (URISyntaxException e) {
+            return false;
+        }
+    }
+}
