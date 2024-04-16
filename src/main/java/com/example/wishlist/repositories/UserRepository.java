@@ -39,11 +39,6 @@ public class UserRepository {
         return jdbcTemplate.query(query, rowMapper, id);
     }
 
-   /* public void editWishList(int id, WishList wishList){
-        String query = "UPDATE wishlist SET wish_list_header = ? WHERE wish_list_id = ?";
-        jdbcTemplate.update(query, wishList.getWishListHeader(), id);
-    }
-    */
    public void editWishList(String header, int wishlistId){
        String query = "UPDATE wishlist SET wish_list_header = ?  WHERE wish_list_id = ?";
        jdbcTemplate.update(query, header, wishlistId);

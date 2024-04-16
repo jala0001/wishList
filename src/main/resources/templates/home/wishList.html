@@ -69,7 +69,6 @@
         <td th:if="${wishLists != null}">
             <form action="/updateWishList" method="get">
                 <input type="hidden" name="wishlistId" th:value="${wishList.wishListId}">
-              <!--  <input type="hidden" name="id" th:value="${user.userId}"> -->
                 <button type="submit">Edit this wishlist</button>
             </form>
         </td>

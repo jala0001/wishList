@@ -69,32 +69,16 @@ public class UserController {
         return "home/chosenWishList";
     }
 
-
-   /* @GetMapping("/updateWishList/{id}")
-    public String updateWishList(@PathVariable("id") int id, Model model){
-        model.addAttribute("wishlist", userService.getWishList(id));
-        return "home/updateWishList";
-    }
-    @PostMapping("/editWishList")
-    public String editWishList(@ModelAttribute WishList wishList){
-        userService.editWishList(wishList.getWishListId(), wishList);
-        return "home/updateWishList"; // TODO
-        //return "redirect:home/wishList";
-    }
-
-    */
-
     @GetMapping("/updateWishList")
     public String updateWishList(@RequestParam int wishlistId, Model model){
-        model.addAttribute(userService.getWishList(wishlistId)); // har slettet "wishlist"
+        model.addAttribute(userService.getWishList(wishlistId));
         return "home/updateWishList";
     }
 
     @PostMapping("/editWishList")
     public String editWishList(@RequestParam String header, @RequestParam int wishlistId, @RequestParam int id){
-        userService.editWishList(header, wishlistId); // ændret alt her
-        return "redirect:/userWishList?id=" + id; // dette gør at din GetMapping får hvad den requester (int id) ellers giver den fejl.
-        // samt jeg har ændret "home" til "redirect" da du gerne vil tilbage.
+        userService.editWishList(header, wishlistId);
+        return "redirect:/userWishList?id=" + id;
     }
 
     @PostMapping("/deleteWishList")
