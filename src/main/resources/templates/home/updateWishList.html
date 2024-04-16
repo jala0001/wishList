@@ -1,0 +1,49 @@
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <title>Edit Wishlist</title>
+</head>
+<body>
+<h1>Edit Wishlist</h1>
+<form action="/editWishList" method="post">
+  <input type="hidden" name="id" th:value="${user.userId}">
+    <table>
+        <tr>
+            <td>Header</td>
+            <td><input type="text" name="header" th:value="${wish_list_header}"></td>
+        </tr>
+    </table>
+    <button type="submit">Save Changes</button>
+</form>
+
+
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Wishlist</title>
+</head>
+<body>
+<h1>Edit Wishlist</h1>
+<form action="/editWishList" method="post">
+    <table>
+        <tr>
+            <td>Header</td>
+            <td><input type="text" name="header"></td> <!-- jeg har slettet:" th:value="${wish_list_header}"" -->
+            <input type="hidden" name="wishlistId" th:value="${wishList.wishListId}">
+            <input type="hidden" name="id" th:value="${wishList.userId}">
+        </tr>
+    </table>
+    <button type="submit">Save Changes</button>
+</form>
+
+
+</body>
+</html>
+
+<!-- <td>Header</td><td><input type="text" name="header"></td>
+   <input type="hidden" name="id" th:value="${user.userId}"> -->

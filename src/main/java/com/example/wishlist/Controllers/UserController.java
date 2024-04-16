@@ -1,15 +1,12 @@
 package com.example.wishlist.Controllers;
 
 import com.example.wishlist.models.User;
+import com.example.wishlist.models.WishList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 public class UserController {
@@ -70,6 +67,34 @@ public class UserController {
         model.addAttribute(userService.getWishList(wishlistId)); // netop tilføjet
         model.addAttribute("wishes", userService.getWishes(wishlistId)); // netop tilføjet
         return "home/chosenWishList";
+    }
+
+
+   /* @GetMapping("/updateWishList/{id}")
+    public String updateWishList(@PathVariable("id") int id, Model model){
+        model.addAttribute("wishlist", userService.getWishList(id));
+        return "home/updateWishList";
+    }
+    @PostMapping("/editWishList")
+    public String editWishList(@ModelAttribute WishList wishList){
+        userService.editWishList(wishList.getWishListId(), wishList);
+        return "home/updateWishList"; // TODO
+        //return "redirect:home/wishList";
+    }
+
+    */
+
+    @GetMapping("/updateWishList")
+    public String updateWishList(@RequestParam int wishlistId, Model model){
+        model.addAttribute(userService.getWishList(wishlistId)); // har slettet "wishlist"
+        return "home/updateWishList";
+    }
+
+    @PostMapping("/editWishList")
+    public String editWishList(@RequestParam String header, @RequestParam int wishlistId, @RequestParam int id){
+        userService.editWishList(header, wishlistId); // ændret alt her
+        return "redirect:/userWishList?id=" + id; // dette gør at din GetMapping får hvad den requester (int id) ellers giver den fejl.
+        // samt jeg har ændret "home" til "redirect" da du gerne vil tilbage.
     }
 
     @PostMapping("/deleteWishList")

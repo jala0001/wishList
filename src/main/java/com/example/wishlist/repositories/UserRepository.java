@@ -38,6 +38,17 @@ public class UserRepository {
         RowMapper rowMapper = new BeanPropertyRowMapper(WishList.class);
         return jdbcTemplate.query(query, rowMapper, id);
     }
+
+   /* public void editWishList(int id, WishList wishList){
+        String query = "UPDATE wishlist SET wish_list_header = ? WHERE wish_list_id = ?";
+        jdbcTemplate.update(query, wishList.getWishListHeader(), id);
+    }
+    */
+   public void editWishList(String header, int wishlistId){
+       String query = "UPDATE wishlist SET wish_list_header = ?  WHERE wish_list_id = ?";
+       jdbcTemplate.update(query, header, wishlistId);
+   }
+
     public List<Wish> getWishes(int wishlistId) {
         String query = "select * from wish where wishlist_id = ?;";
         RowMapper rowMapper = new BeanPropertyRowMapper(Wish.class);
@@ -49,7 +60,6 @@ public class UserRepository {
                 "values(?, ?, ?);";
         jdbcTemplate.update(query, username, userEmail, password);
     }
-
 
     public void addWishList(String header, int id) {
         String query = "insert into wishlist(user_id, wish_list_header)" +
@@ -67,7 +77,6 @@ public class UserRepository {
         String query = "delete from wishlist where wish_list_id = ?;";
         jdbcTemplate.update(query, wishlistId);
     }
-
 
     public void deleteWish(int wishId) {
         String query = "delete from wish where wish_id = ?;";

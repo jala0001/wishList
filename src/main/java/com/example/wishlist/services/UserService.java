@@ -21,6 +21,15 @@ public class UserService {
         return userRepository.getWishLists(id);
     }
 
+   /* public void editWishList (int id, WishList wishList){
+        userRepository.editWishList(id, wishList);
+    }
+    */
+
+    public void editWishList (String header, int wishlistId){ // ændret i parametre så det passer med controlleren
+        userRepository.editWishList(header, wishlistId);
+    }
+
     public User getUser(int id) {
         return userRepository.getUser(id);
     }
