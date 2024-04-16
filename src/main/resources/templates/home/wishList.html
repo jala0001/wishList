@@ -66,6 +66,7 @@
     <tr>
         <td>Header</td>
         <td>Chose wishlist</td>
+        <td>Edit wishlist</td>
         <td>Delete wishlist</td>
     </tr>
     </thead>
@@ -76,6 +77,12 @@
             <form action="/chooseWishList" method="get">
                 <input type="hidden" name="wishlistId" th:value="${wishList.wishListId}">
                 <button type="submit">Choose this wishlist!</button>
+            </form>
+        </td>
+        <td th:if="${wishLists != null}">
+            <form action="/updateWishList" method="get">
+                <input type="hidden" name="wishlistId" th:value="${wishList.wishListId}">
+                <button type="submit">Edit this wishlist</button>
             </form>
         </td>
         <td th:if="${wishLists != null}">

@@ -1,16 +1,16 @@
 package com.example.wishlist.Controllers;
 
 import com.example.wishlist.models.User;
+<<<<<<< HEAD
 import com.example.wishlist.repositories.UserRepository;
+=======
+import com.example.wishlist.models.WishList;
+>>>>>>> 7d5d22e678c1e6f57bd97a0386679f762a0eddbb
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 public class UserController {
@@ -72,6 +72,18 @@ public class UserController {
         model.addAttribute(userService.getWishList(wishlistId)); // netop tilføjet
         model.addAttribute("wishes", userService.getWishes(wishlistId)); // netop tilføjet
         return "home/chosenWishList";
+    }
+
+    @GetMapping("/updateWishList")
+    public String updateWishList(@RequestParam int wishlistId, Model model){
+        model.addAttribute(userService.getWishList(wishlistId));
+        return "home/updateWishList";
+    }
+
+    @PostMapping("/editWishList")
+    public String editWishList(@RequestParam String header, @RequestParam int wishlistId, @RequestParam int id){
+        userService.editWishList(header, wishlistId);
+        return "redirect:/userWishList?id=" + id;
     }
 
     @PostMapping("/deleteWishList")
