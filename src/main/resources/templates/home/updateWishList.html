@@ -4,21 +4,95 @@
 <head>
     <meta charset="UTF-8">
     <title>Edit Wishlist</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ecf0f5;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            max-width: 600px;
+            width: 90%;
+            padding: 40px;
+            background-color: #fff;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 36px;
+            color: #5dade2;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 12px 24px;
+            background-color: #5dade2;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #3498db;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #ddd;
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+
+        form input[type="text"] {
+            width: calc(100% - 20px);
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+
+    </style>
 </head>
 <body>
+<div class="container">
 <h1>Edit Wishlist</h1>
 <form action="/editWishList" method="post">
+
+    <hr>
+
     <table>
         <tr>
-            <td>Header</td>
+            <td>Wishlist's new name: </td>
             <td><input type="text" name="header"></td>
             <input type="hidden" name="wishlistId" th:value="${wishList.wishListId}">
             <input type="hidden" name="id" th:value="${wishList.userId}">
         </tr>
     </table>
+
+    <hr>
     <button type="submit">Save Changes</button>
 </form>
-
+</div>
 
 </body>
 </html>
