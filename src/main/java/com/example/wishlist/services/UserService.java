@@ -1,5 +1,6 @@
 package com.example.wishlist.services;
 
+import com.example.wishlist.models.SharedWishList;
 import com.example.wishlist.models.User;
 import com.example.wishlist.models.Wish;
 import com.example.wishlist.models.WishList;
@@ -62,5 +63,10 @@ public class UserService {
 
     public void reserveWish(int wishId) {
         userRepository.reserveWish(wishId);
+    }
+
+    public List<SharedWishList> getSharedWishlists(int id) {
+        return userRepository.getSharedWishlists(id);
+
     }
 }

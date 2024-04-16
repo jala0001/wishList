@@ -51,6 +51,8 @@ public class UserController {
     public String pickUser(@RequestParam int id, Model model) {
         model.addAttribute(userService.getUser(id));
         model.addAttribute("wishLists", userService.getWishLists(id));
+        model.addAttribute("sharedWishlists", userService.getSharedWishlists(id));
+
         return "home/wishList";
     }
 
@@ -114,8 +116,8 @@ public class UserController {
 
     @GetMapping("/pickSharedWishList")
     public String pickSharedWishList(@RequestParam int sharedWishLists, @RequestParam int id, Model model) {
-        model.addAttribute(userService.getWishList(sharedWishLists));
-        model.addAttribute("wishes", userService.getWishes(sharedWishLists));
+        model.addAttribute(userService.getWishList(sharedWishLists)); // Overskriften på ønskelisten
+        model.addAttribute("wishes", userService.getWishes(sharedWishLists)); // alle ønskerne i listen
         model.addAttribute("goBack", userService.getUser(id));
         return "home/sharedWishList";
     }
