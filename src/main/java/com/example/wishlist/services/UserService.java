@@ -53,4 +53,14 @@ public class UserService {
     public void addWish(String header, String link, double price, String note, int wishlistId) {
         userRepository.addWish(header, link, price, note, wishlistId);
     }
+
+
+    public void shareWithUser(int wishlistId, int userId) {
+        userRepository.shareWithUser(wishlistId, userId);
+    }
+
+
+    public void reserveWish(int wishId) {
+        userRepository.reserveWish(wishId);
+    }
 }

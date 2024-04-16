@@ -8,10 +8,9 @@ public class User {
     private String username;
     private String userEmail;
     private String password;
-    private List<WishList> sharedWishLists;
+    private int sharedWishLists;
 
     public User() {
-        sharedWishLists = new ArrayList<>();
 
     }
 
@@ -45,5 +44,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public int getSharedWishLists() {
+        return sharedWishLists;
+    }
+
+    public void setSharedWishLists(int sharedWishLists) {
+        this.sharedWishLists = sharedWishLists;
     }
 }

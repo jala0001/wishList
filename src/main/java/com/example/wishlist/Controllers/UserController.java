@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -99,9 +100,32 @@ public class UserController {
     }
 
     @GetMapping("/shareWishList")
-    public String shareWishList(@RequestParam int wishlistId, Model model) {
+    public String shareWishList(@RequestParam int wishlistId, @RequestParam int id, Model model) {
         model.addAttribute(userService.getWishList(wishlistId));
         model.addAttribute("users", userService.getUsers());
         return "home/shareWishList";
     }
+
+    @PostMapping("/shareWishListAction")
+    public String shareWishList(@RequestParam int wishlistId, @RequestParam int userId) {
+        userService.shareWithUser(wishlistId, userId);
+        return "redirect:/chooseWishList?wishlistId=" + wishlistId;
+    }
+
+    @GetMapping("/pickSharedWishList")
+    public String pickSharedWishList(@RequestParam int sharedWishLists, @RequestParam int id, Model model) {
+        model.addAttribute(userService.getWishList(sharedWishLists));
+        model.addAttribute("wishes", userService.getWishes(sharedWishLists));
+        model.addAttribute("goBack", userService.getUser(id));
+        return "home/sharedWishList";
+    }
+
+    @PostMapping("/reserveWish")
+    public String reserveWish(@RequestParam int wishId, @RequestParam int sharedWishLists,
+                              @RequestParam int id) {
+        userService.reserveWish(wishId);
+        return "redirect:/pickSharedWishList?sharedWishLists=" + sharedWishLists + "&id=" + id;
+    }
+
+
 }

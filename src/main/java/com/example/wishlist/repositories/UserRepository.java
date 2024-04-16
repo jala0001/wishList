@@ -45,9 +45,9 @@ public class UserRepository {
     }
 
     public void addUser(String username, String userEmail, String password) {
-        String query = "insert into user(username, user_email, password)" +
-                "values(?, ?, ?);";
-        jdbcTemplate.update(query, username, userEmail, password);
+        String query = "insert into user(username, user_email, password, shared_wish_lists)" +
+                "values(?, ?, ?, ?);";
+        jdbcTemplate.update(query, username, userEmail, password, 0);
     }
 
 
@@ -58,9 +58,9 @@ public class UserRepository {
     }
 
     public void addWish(String header, String link, double price, String note, int wishlistId) {
-        String query = "insert into wish(wishlist_id, wish_header, wish_link, wish_price, wish_note)" +
-                "values(?, ?, ?, ?, ?);";
-        jdbcTemplate.update(query, wishlistId, header, link, price, note);
+        String query = "insert into wish(wishlist_id, wish_header, wish_link, wish_price, wish_note, is_reserved)" +
+                "values(?, ?, ?, ?, ?, ?);";
+        jdbcTemplate.update(query, wishlistId, header, link, price, note, 0);
     }
 
     public void deleteUser(int wishlistId) {
@@ -75,4 +75,13 @@ public class UserRepository {
     }
 
 
+    public void shareWithUser(int wishlistId, int userId) {
+        String query = "update user set shared_wish_lists = ? where user_id = ?;";
+        jdbcTemplate.update(query, wishlistId, userId);
+    }
+
+    public void reserveWish(int wishId) {
+        String query = "update wish set is_reserved = ? where wish_id = ?;";
+        jdbcTemplate.update(query, 1, wishId);
+    }
 }

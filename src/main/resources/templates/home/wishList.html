@@ -47,7 +47,10 @@
 <form action="/addWishList" method="get">
     <input type="hidden" name="id" th:value="${user.userId}">
     <button type="submit">Add a new wishlist!</button>
+
 </form>
+
+
 <table>
     <thead>
     <tr>
@@ -76,8 +79,23 @@
     </tbody>
 </table>
 <br>
+<br>
+
+
+
+
+
 <form action="/" method="get">
     <button type="submit">Log out</button>
+</form>
+<br>
+<br>
+<br>
+<br>
+<form style="text-align: center" th:if="${user.sharedWishLists != 0}" action="pickSharedWishList" method="get">
+    <input type="hidden" name="sharedWishLists" th:value="${user.sharedWishLists}">
+    <input type="hidden" name="id" th:value="${user.userId}">
+    <button type="submit">Look at the wishlist that has been shared with you!</button>
 </form>
 </body>
 </html>

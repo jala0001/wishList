@@ -2,11 +2,12 @@ package com.example.wishlist.models;
 
 public class Wish {
     private int wishId;
-    private int wishlistId; // DENNE ER ÆNDRET FRA userId for at matche ændringen i SQL
+    private int wishlistId;
     private String wishHeader;
     private String wishLink;
     private double wishPrice;
     private String wishNote;
+    private int isReserved;
 
     public Wish() {
 
@@ -58,5 +59,13 @@ public class Wish {
 
     public void setWishNote(String wishNote) {
         this.wishNote = wishNote;
+    }
+
+    public int getIsReserved() {
+        return isReserved;
+    }
+
+    public void setIsReserved(int isReserved) {
+        this.isReserved = isReserved;
     }
 }

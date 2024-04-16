@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Chosen Wish List</title>
+    <title>Shared wishlist</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -43,16 +43,7 @@
 </head>
 <body>
 <h1><span th:text="${wishList.wishListHeader}"></span></h1>
-<form action="/addWish" method="get">
-    <input type="hidden" name="wishlistId" th:value="${wishList.wishListId}">
-    <button type="submit">Add wish!</button>
-</form>
-<br>
-<form action="/shareWishList" method="get">
-    <input type="hidden" name="wishlistId" th:value="${wishList.wishListId}">
-    <input type="hidden" name="id" th:value="${wishList.userId}">
-    <button type="submit">Share this wishlist with other users!</button>
-</form>
+
 <table>
     <thead>
     <tr>
@@ -70,20 +61,24 @@
         <td th:text="${wish.wishPrice}"></td>
         <td th:text="${wish.wishNote}"></td>
         <td th:if="${wishes != null}">
-            <form action="/deleteWish" method="post">
+            <form action="/reserveWish" method="post">
                 <input type="hidden" name="wishId" th:value="${wish.wishId}">
-                <input type="hidden" name="wishlistId" th:value="${wishList.wishListId}">
-                <button type="submit">Delete wish</button>
+                <input type="hidden" name="sharedWishLists" th:value="${wishList.wishListId}">
+                <input type="hidden" name="id" th:value="${goBack.userId}"> <!-- "goBack" dårlig navngivning sorry-->
+                <button type="submit" th:if="${wish.isReserved == 0}">Reserve this wish!</button>
+                <!-- Add an alternative message or action if wish is already reserved -->
+                <span th:if="${wish.isReserved == 1}">Wish already reserved</span>
             </form>
         </td>
+
     </tr>
     </tbody>
 </table>
 
 <br>
 <form action="/userWishList" method="get">
-    <input type="hidden" name="id" th:value="${wishList.userId}">
-    <button type="submit">Go back to all your wishlists!</button>
+    <input type="hidden" name="id" th:value="${goBack.userId}">
+    <button type="submit">Go back to your own profile!</button>
 </form>
 
 
