@@ -7,6 +7,7 @@ import com.example.wishlist.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -55,5 +56,7 @@ public class UserService {
     public void addWish(String header, String link, double price, String note, int wishlistId) {
         userRepository.addWish(header, link, price, note, wishlistId);
     }
+
+
 }
 
