@@ -90,12 +90,25 @@ public class UserController {
         return "home/addWish";
     }
 
-    @PostMapping("/addWishAction")
+    /* @PostMapping("/addWishAction")
     public String addWish(@RequestParam String header, @RequestParam String link,
                           @RequestParam double price, @RequestParam String note,
                           @RequestParam int wishlistId) {
         userService.addWish(header, link, price, note, wishlistId);
         return "redirect:/chooseWishList?wishlistId=" + wishlistId;
+    }
+     */
+
+    @PostMapping("/addWishAction") // NYT EMILIA
+    public String addWish(@RequestParam String header, @RequestParam String link,
+                          @RequestParam double price, @RequestParam String note,
+                          @RequestParam int wishlistId) {
+        if (userService.isValidURL(link)) {
+            userService.addWish(header, link, price, note, wishlistId);
+            return "redirect:/chooseWishList?wishlistId=" + wishlistId;
+        } else {
+            return "redirect:/invalidURL"; // Omdiriger til en side, der viser en fejlbesked
+        }
     }
 
     @GetMapping("/shareWishList")
@@ -103,5 +116,10 @@ public class UserController {
         model.addAttribute(userService.getWishList(wishlistId));
         model.addAttribute("users", userService.getUsers());
         return "home/shareWishList";
+    }
+
+    @GetMapping("/invalidURL") // NYT EMILIA
+    public String showInvalidURLPage() {
+        return "invalidURL";
     }
 }
