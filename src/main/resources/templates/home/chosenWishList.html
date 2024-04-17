@@ -1,47 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Chosen Wish List</title>
+    <title>Chosen Wish List!</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
-        }
-        h1 {
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        th, td {
-            padding: 10px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        tr:hover {
-            background-color: #f5f5f5;
-        }
-        button {
-            padding: 10px 20px;
-            background-color: #87CEEB;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #00BFFF;
-        }
+ HEAD
     </style>
 </head>
 <body>
+
+<form action="/wishlistAdd" method="post">
+    <label> Title: </label>
+    <input type="text" name="title"><br>
+    <label>Link:</label>
+    <input type="text" name="link"><br>
+    <label>Note:</label>
+    <input type="text" name="note"><br>
+    <a th:href="${link}" target="_blank"></a>
+    <button type="submit"> Add to wish list</button>
+</form>
+
 <h1><span th:text="${wishList.wishListHeader}"></span></h1>
 <form action="/addWish" method="get">
     <input type="hidden" name="wishlistId" th:value="${wishList.wishListId}">
@@ -85,7 +63,5 @@
     <input type="hidden" name="id" th:value="${wishList.userId}">
     <button type="submit">Go back to all your wishlists!</button>
 </form>
-
-
 </body>
 </html>

@@ -8,6 +8,7 @@ import com.example.wishlist.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,6 +23,10 @@ public class UserService {
         return userRepository.getWishLists(id);
     }
 
+    public void editWishList (String header, int wishlistId){
+        userRepository.editWishList(header, wishlistId);
+    }
+
     public User getUser(int id) {
         return userRepository.getUser(id);
     }
@@ -30,7 +35,6 @@ public class UserService {
         userRepository.addUser(username, userEmail, password);
     }
 
-
     public void addWishList(String header, int id) {
         userRepository.addWishList(header, id);
     }
@@ -38,6 +42,7 @@ public class UserService {
     public void deleteUser(int wishlistId) {
         userRepository.deleteUser(wishlistId);
     }
+
 
     public WishList getWishList(int wishlistId) {
         return userRepository.getWishList(wishlistId);
@@ -56,6 +61,7 @@ public class UserService {
     }
 
 
+
     public void shareWithUser(int wishlistId, int userId) {
         userRepository.shareWithUser(wishlistId, userId);
     }
@@ -70,3 +76,5 @@ public class UserService {
 
     }
 }
+
+

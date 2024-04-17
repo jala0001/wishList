@@ -1,25 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
-    <title>Wish list</title>
+    <title> Wish list</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: Roboto, sans-serif;
             padding: 20px;
+            background: linear-gradient(to bottom right, #f5f5f5, #00BFFF);
         }
-        h1 {
-            margin-bottom: 20px;
+        .container{
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .heading-container{
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+        }
+        h2{
+            text-align: center;
+            font-family: "Times New Roman", Times, serif;
+            font-size: 48px;
+            font-weight: bold;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
         }
         table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1)
         }
         th, td {
             padding: 10px;
             text-align: left;
             border-bottom: 1px solid #ddd;
+            height: 50px;
+            width: 250px;
         }
         th {
             background-color: #f2f2f2;
@@ -29,11 +52,12 @@
         }
         button {
             padding: 10px 20px;
-            background-color: #87CEEB;
+            background-color: royalblue;
             color: white;
             border: none;
             border-radius: 4px;
             cursor: pointer;
+            transition: background-color 0.3s ease;
         }
         button:hover {
             background-color: #00BFFF;
@@ -41,9 +65,10 @@
     </style>
 </head>
 <body>
-<h1 style="text-align: center;"><span th:text="${user.username}"></span>'s profile!</h1>
-
-<h2>Your wishlists!</h2>
+<div class="container">
+    <div class="heading-container">
+<h2> Your wishlists!  </h2>
+</div>
 <form action="/addWishList" method="get">
     <input type="hidden" name="id" th:value="${user.userId}">
     <button type="submit">Add a new wishlist!</button>
@@ -56,6 +81,7 @@
     <tr>
         <td>Header</td>
         <td>Chose wishlist</td>
+        <td>Edit wishlist</td>
         <td>Delete wishlist</td>
     </tr>
     </thead>
@@ -66,6 +92,12 @@
             <form action="/chooseWishList" method="get">
                 <input type="hidden" name="wishlistId" th:value="${wishList.wishListId}">
                 <button type="submit">Choose this wishlist!</button>
+            </form>
+        </td>
+        <td th:if="${wishLists != null}">
+            <form action="/updateWishList" method="get">
+                <input type="hidden" name="wishlistId" th:value="${wishList.wishListId}">
+                <button type="submit">Edit this wishlist</button>
             </form>
         </td>
         <td th:if="${wishLists != null}">
@@ -88,6 +120,7 @@
 <form action="/" method="get">
     <button type="submit">Log out</button>
 </form>
+
 <br>
 
 
@@ -109,6 +142,9 @@
 </div>
 
 
+
+
+</div>
 
 </body>
 </html>

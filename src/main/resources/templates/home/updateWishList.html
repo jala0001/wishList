@@ -1,8 +1,9 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>share</title>
+    <title>Edit Wishlist</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -36,12 +37,10 @@
             width: 100%;
             border-collapse: collapse;
             margin-top: 30px;
-            margin-bottom: 30px;
         }
 
         button {
-            margin-top: 10px;
-            margin-bottom: 10px;
+            margin-top: 20px;
             padding: 12px 24px;
             background-color: #5dade2;
             color: white;
@@ -62,44 +61,38 @@
             margin-bottom: 20px;
         }
 
-        td {
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
+        form input[type="text"] {
+            width: calc(100% - 20px);
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
         }
-
-       /* th {
-            background-color: #aed6f1;
-            color: #fff;
-            font-weight: bold;
-            text-transform: uppercase;
-            border-radius: 10px 10px 0 0;
-        }
-
-        */
-
 
 
     </style>
 </head>
 <body>
 <div class="container">
-<h1>Share wishlist</h1>
+<h1>Edit Wishlist</h1>
+<form action="/editWishList" method="post">
 
-<table>
-    <thead><td>Users</td><td>Action</td></thead>
-    <tr th:each="user : ${users}">
-        <td th:text="${user.username}"></td>
-        <td th:if="${users != null}">
-            <form action="/shareWishListAction" method="post">
-                <input type="hidden" name="wishlistId" th:value="${wishList.wishListId}">
-                <input type="hidden" name="userId" th:value="${user.userId}"> <!-- id'et fra den man sender til -->
-                <button type="submit">Share with this user!</button>
-            </form>
-            <!-- <td><button type="submit">Share with this user!</button></td>-->
-            </td>
+    <hr>
+
+    <table>
+        <tr>
+            <td>Wishlist's new name: </td>
+            <td><input type="text" name="header"></td>
+            <input type="hidden" name="wishlistId" th:value="${wishList.wishListId}">
+            <input type="hidden" name="id" th:value="${wishList.userId}">
         </tr>
     </table>
-    </div>
 
-    </body>
-    </html>
+    <hr>
+    <button type="submit">Save Changes</button>
+</form>
+</div>
+
+</body>
+</html>
