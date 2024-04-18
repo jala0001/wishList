@@ -1,5 +1,6 @@
 package com.example.wishlist.repositories;
 
+import com.example.wishlist.models.SharedWishList;
 import com.example.wishlist.models.User;
 import com.example.wishlist.models.Wish;
 import com.example.wishlist.models.WishList;
@@ -21,6 +22,12 @@ public class UserRepository {
         String query = "select * from User;";
         RowMapper rowMapper = new BeanPropertyRowMapper(User.class);
         return jdbcTemplate.query(query, rowMapper);
+    }
+
+    public List<SharedWishList> getSharedWishlists(int id) {
+        String query = "select * from shared_with_user where user_id = ?;";
+        RowMapper rowMapper = new BeanPropertyRowMapper(SharedWishList.class);
+        return jdbcTemplate.query(query, rowMapper, id);
     }
 
     public User getUser(int id) {
@@ -51,9 +58,9 @@ public class UserRepository {
     }
 
     public void addUser(String username, String userEmail, String password) {
-        String query = "insert into user(username, user_email, password)" +
-                "values(?, ?, ?);";
-        jdbcTemplate.update(query, username, userEmail, password);
+        String query = "insert into user(username, user_email, password, shared_wish_lists)" +
+                "values(?, ?, ?, ?);";
+        jdbcTemplate.update(query, username, userEmail, password, 0);
     }
 
     public void addWishList(String header, int id) {
@@ -63,9 +70,15 @@ public class UserRepository {
     }
 
     public void addWish(String header, String link, double price, String note, int wishlistId) {
-        String query = "insert into wish(wishlist_id, wish_header, wish_link, wish_price, wish_note)" +
-                "values(?, ?, ?, ?, ?);";
-        jdbcTemplate.update(query, wishlistId, header, link, price, note);
+        String query = "insert into wish(wishlist_id, wish_header, wish_link, wish_price, wish_note, is_reserved)" +
+                "values(?, ?, ?, ?, ?, ?);";
+        jdbcTemplate.update(query, wishlistId, header, link, price, note, 0);
+    }
+
+    public void shareWithUser(int wishlistId, int userId) {
+        String query = "insert into shared_with_user(user_id, shared_wishlists)" +
+                "values(?, ?);";
+        jdbcTemplate.update(query, userId, wishlistId);
     }
 
     public void deleteUser(int wishlistId) {
@@ -76,6 +89,14 @@ public class UserRepository {
     public void deleteWish(int wishId) {
         String query = "delete from wish where wish_id = ?;";
         jdbcTemplate.update(query, wishId);
+    }
+
+
+
+
+    public void reserveWish(int wishId) {
+        String query = "update wish set is_reserved = ? where wish_id = ?;";
+        jdbcTemplate.update(query, 1, wishId);
     }
 
 

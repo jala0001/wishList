@@ -1,5 +1,6 @@
 package com.example.wishlist.services;
 
+import com.example.wishlist.models.SharedWishList;
 import com.example.wishlist.models.User;
 import com.example.wishlist.models.Wish;
 import com.example.wishlist.models.WishList;
@@ -57,16 +58,27 @@ public class UserService {
         userRepository.deleteWish(wishId);
     }
 
-    /* public void addWish(String header, String link, double price, String note, int wishlistId) {
+    /*
+    public void addWish(String header, String link, double price, String note, int wishlistId) {
         userRepository.addWish(header, link, price, note, wishlistId);
     }
-<<<<<<< HEAD
 
-
-}
-
-=======
      */
+
+    public void shareWithUser(int wishlistId, int userId) {
+        userRepository.shareWithUser(wishlistId, userId);
+    }
+
+
+    public void reserveWish(int wishId) {
+        userRepository.reserveWish(wishId);
+    }
+
+    public List<SharedWishList> getSharedWishlists(int id) {
+        return userRepository.getSharedWishlists(id);
+
+    }
+
 
     public void addWish(String header, String link, double price, String note, int wishlistId) { // NYT EMILIA
         if (isValidURL(link)) {
@@ -85,3 +97,4 @@ public class UserService {
         }
     }
 }
+

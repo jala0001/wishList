@@ -72,7 +72,10 @@
 <form action="/addWishList" method="get">
     <input type="hidden" name="id" th:value="${user.userId}">
     <button type="submit">Add a new wishlist!</button>
+
 </form>
+
+
 <table>
     <thead>
     <tr>
@@ -108,9 +111,40 @@
     </tbody>
 </table>
 <br>
+<br>
+
+
+
+
+
 <form action="/" method="get">
     <button type="submit">Log out</button>
 </form>
+
+<br>
+
+
+<table th:if="${sharedWishlists.size() != 0}">
+    <thead><td>Shared wishlist</td><td>Action</td></thead>
+    <tr th:each="shared : ${sharedWishlists}">
+        <td th:text="${shared.sharedWishlists}"></td>
+        <td>
+            <form action="/pickSharedWishList" method="get">
+                <input type="hidden" name="sharedWishLists" th:value="${shared.sharedWishlists}">
+                <input type="hidden" name="id" th:value="${shared.userId}">
+                <button type="submit">Pick this wishlist</button>
+            </form>
+        </td>
+    </tr>
+</table>
+<div th:if="${sharedWishlists.size() == 0}">
+    Du har ingen delte ønskelister.
 </div>
+
+
+
+
+</div>
+
 </body>
 </html>
