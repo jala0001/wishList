@@ -105,15 +105,6 @@ public class UserController {
         return "home/addWish";
     }
 
-    /* @PostMapping("/addWishAction")
-    public String addWish(@RequestParam String header, @RequestParam String link,
-                          @RequestParam double price, @RequestParam String note,
-                          @RequestParam int wishlistId) {
-        userService.addWish(header, link, price, note, wishlistId);
-        return "redirect:/chooseWishList?wishlistId=" + wishlistId;
-    }
-     */
-
     @PostMapping("/addWishAction") // NYT EMILIA
     public String addWish(@RequestParam String header, @RequestParam String link,
                           @RequestParam double price, @RequestParam String note,

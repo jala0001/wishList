@@ -91,9 +91,6 @@ public class UserRepository {
         jdbcTemplate.update(query, wishId);
     }
 
-
-
-
     public void reserveWish(int wishId) {
         String query = "update wish set is_reserved = ? where wish_id = ?;";
         jdbcTemplate.update(query, 1, wishId);
