@@ -3,17 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <title>Add user</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif; /* Ændret skrifttypen */
+            margin: 0;
+            padding: 0;
+            background-color: #ecf0f5;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px; /* Ændret fra 400px til 800px */
+            width: 90%;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            text-align: center; /* Tilføjet */
+        }
+
+        .heading-container { /* Tilføjet */
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 36px; /* Ændret fra 24px til 36px */
+            color: #5dade2;
+        }
+
+        form table {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        form td {
+            padding: 10px;
+            text-align: right;
+        }
+
+        form input[type="text"] {
+            width: calc(100% - 20px);
+            padding: 12px; /* Ændret fra 8px til 12px */
+            margin-bottom: 20px; /* Ændret fra 10px til 20px */
+            border: 1px solid #ddd;
+            border-radius: 25px; /* Ændret fra 4px til 25px */
+            box-sizing: border-box;
+        }
+
+        form button[type="submit"] {
+            width: calc(100% - 20px);
+            padding: 12px 24px; /* Ændret padding */
+            background-color: #5dade2;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        form button[type="submit"]:hover {
+            background-color: #3498db;
+        }
+    </style>
 </head>
 <body>
-<h1>Add user</h1>
+<div class="container">
+    <div class="heading-container"> <!-- Tilføjet -->
+        <h1>Add user</h1> <!-- Ændret til h1 -->
+    </div>
 
-<form action="/addUser" method="post">
-    <td>Username</td><td><input type="text" name="username"></td>
-    <td>E-mail</td><td><input type="text" name="userEmail"></td>
-    <td>Password</td><td><input type="text" name="password"></td>
-    <button type="submit">Submit!</button>
-</form>
-
-
+    <form action="/addUser" method="post">
+        <table>
+            <tr>
+                <td>Username</td>
+                <td><input type="text" name="username"></td>
+            </tr>
+            <tr>
+                <td>E-mail</td>
+                <td><input type="text" name="userEmail"></td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td><input type="text" name="password"></td>
+            </tr>
+        </table>
+        <button type="submit">Submit!</button>
+    </form>
+</div>
 </body>
 </html>

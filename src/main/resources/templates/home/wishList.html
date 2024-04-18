@@ -1,150 +1,159 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title> Wish list</title>
+    <title>Wish list</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ecf0f5;
+            color: #333;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            font-family: Roboto, sans-serif;
-            padding: 20px;
-            background: linear-gradient(to bottom right, #f5f5f5, #00BFFF);
+            min-height: 100vh;
         }
-        .container{
-            padding: 20px;
+
+        .container {
             max-width: 800px;
-            margin: 0 auto;
+            width: 90%;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
-        .heading-container{
-            background-color: rgba(255, 255, 255, 0.1);
+
+        .heading-container {
+            background-color: #fff;
             padding: 20px;
             border-radius: 8px;
+            margin-bottom: 20px;
         }
-        h2{
-            text-align: center;
-            font-family: "Times New Roman", Times, serif;
-            font-size: 48px;
+
+        h2 {
+            font-family: 'Arial', sans-serif;
+            font-size: 36px;
             font-weight: bold;
             margin: 0;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+            text-align: center;
+            color: #5dade2;
         }
+
         table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1)
         }
+
         th, td {
-            padding: 10px;
-            text-align: left;
+            padding: 15px;
             border-bottom: 1px solid #ddd;
-            height: 50px;
-            width: 250px;
+            text-align: left;
         }
+
         th {
-            background-color: #f2f2f2;
+            background-color: #aed6f1;
+            color: #fff;
+            font-weight: bold;
+            text-transform: uppercase;
+            border-radius: 10px 10px 0 0;
         }
+
         tr:hover {
-            background-color: #f5f5f5;
+            background-color: #d6eaf8;
         }
+
         button {
-            padding: 10px 20px;
-            background-color: royalblue;
+            padding: 12px 24px;
+            background-color: #5dade2;
             color: white;
             border: none;
-            border-radius: 4px;
+            border-radius: 25px;
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
+
         button:hover {
-            background-color: #00BFFF;
+            background-color: #3498db;
         }
     </style>
 </head>
 <body>
 <div class="container">
     <div class="heading-container">
-<h2> Your wishlists!  </h2>
+        <h2>Your wishlists!</h2>
+    </div>
+
+    <form action="/addWishList" method="get">
+        <input type="hidden" name="id" th:value="${user.userId}">
+        <button type="submit">Add a new wishlist!</button>
+    </form>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Header</th>
+            <th>Choose wishlist</th>
+            <th>Edit wishlist</th>
+            <th>Delete wishlist</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="wishList : ${wishLists}">
+            <td th:text="${wishList.wishListHeader}"></td>
+            <td th:if="${wishLists != null}">
+                <form action="/chooseWishList" method="get">
+                    <input type="hidden" name="wishlistId" th:value="${wishList.wishListId}">
+                    <button type="submit">Choose this wishlist!</button>
+                </form>
+            </td>
+            <td th:if="${wishLists != null}">
+                <form action="/updateWishList" method="get">
+                    <input type="hidden" name="wishlistId" th:value="${wishList.wishListId}">
+                    <button type="submit">Edit this wishlist</button>
+                </form>
+            </td>
+            <td th:if="${wishLists != null}">
+                <form action="deleteWishList" method="post">
+                    <input type="hidden" name="wishlistId" th:value="${wishList.wishListId}">
+                    <input type="hidden" name="id" th:value="${user.userId}">
+                    <button type="submit">Delete this wishlist</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <br><br>
+
+    <form action="/" method="get">
+        <button type="submit">Log out</button>
+    </form>
+
+    <br>
+
+    <table th:if="${sharedWishlists.size() != 0}">
+        <thead>
+        <td>Shared wishlist</td>
+        <td>Action</td>
+        </thead>
+        <tr th:each="shared : ${sharedWishlists}">
+            <td th:text="${shared.sharedWishlists}"></td>
+            <td>
+                <form action="/pickSharedWishList" method="get">
+                    <input type="hidden" name="sharedWishLists" th:value="${shared.sharedWishlists}">
+                    <input type="hidden" name="id" th:value="${shared.userId}">
+                    <button type="submit">Pick this wishlist</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+    <div th:if="${sharedWishlists.size() == 0}">
+        Du har ingen delte ønskelister.
+    </div>
 </div>
-<form action="/addWishList" method="get">
-    <input type="hidden" name="id" th:value="${user.userId}">
-    <button type="submit">Add a new wishlist!</button>
-
-</form>
-
-
-<table>
-    <thead>
-    <tr>
-        <td>Header</td>
-        <td>Chose wishlist</td>
-        <td>Edit wishlist</td>
-        <td>Delete wishlist</td>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="wishList : ${wishLists}">
-        <td th:text="${wishList.wishListHeader}"></td>
-        <td th:if="${wishLists != null}">
-            <form action="/chooseWishList" method="get">
-                <input type="hidden" name="wishlistId" th:value="${wishList.wishListId}">
-                <button type="submit">Choose this wishlist!</button>
-            </form>
-        </td>
-        <td th:if="${wishLists != null}">
-            <form action="/updateWishList" method="get">
-                <input type="hidden" name="wishlistId" th:value="${wishList.wishListId}">
-                <button type="submit">Edit this wishlist</button>
-            </form>
-        </td>
-        <td th:if="${wishLists != null}">
-            <form action="deleteWishList" method="post">
-                <input type="hidden" name="wishlistId" th:value="${wishList.wishListId}">
-                <input type="hidden" name="id" th:value="${user.userId}">
-                <button type="submit">Delete this wishlist</button>
-            </form>
-        </td>
-    </tr>
-    </tbody>
-</table>
-<br>
-<br>
-
-
-
-
-
-<form action="/" method="get">
-    <button type="submit">Log out</button>
-</form>
-
-<br>
-
-
-<table th:if="${sharedWishlists.size() != 0}">
-    <thead><td>Shared wishlist</td><td>Action</td></thead>
-    <tr th:each="shared : ${sharedWishlists}">
-        <td th:text="${shared.sharedWishlists}"></td>
-        <td>
-            <form action="/pickSharedWishList" method="get">
-                <input type="hidden" name="sharedWishLists" th:value="${shared.sharedWishlists}">
-                <input type="hidden" name="id" th:value="${shared.userId}">
-                <button type="submit">Pick this wishlist</button>
-            </form>
-        </td>
-    </tr>
-</table>
-<div th:if="${sharedWishlists.size() == 0}">
-    Du har ingen delte ønskelister.
-</div>
-
-
-
-
-</div>
-
 </body>
 </html>

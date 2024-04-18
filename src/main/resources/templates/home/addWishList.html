@@ -2,20 +2,86 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>add wishlist</title>
+    <title>Add wishlist</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ecf0f5;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 600px;
+            width: 90%;
+            padding: 40px;
+            background-color: #fff;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            font-family: 'Arial', sans-serif;
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #5dade2;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            width: 300px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            width: 100%;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            padding: 12px 24px;
+            background-color: #5dade2;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #3498db;
+        }
+    </style>
 </head>
 <body>
-<h1>Create a new wishlist!</h1>
+<div class="container">
+    <h1>Create a new wishlist!</h1>
 
     <form action="/addWishListAction" method="post">
-        <td>Header</td><td><input type="text" name="header"></td>
+        <div class="form-group">
+            <input type="text" name="header" placeholder="Header">
+        </div>
         <input type="hidden" name="id" th:value="${user.userId}">
         <button type="submit">Submit!</button>
     </form>
-
-
-
-
-
+</div>
 </body>
 </html>
+
+

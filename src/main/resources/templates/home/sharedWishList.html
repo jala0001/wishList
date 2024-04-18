@@ -3,84 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <title>Shared wishlist</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        .container {
+            background-color: #fff;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
             padding: 20px;
+            margin: 0 auto;
+            max-width: 800px;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif; /* Ændret skrifttypen */
+            padding: 20px;
+            background-color: #ecf0f5; /* Tilføjet baggrundsfarve */
         }
         h1 {
             margin-bottom: 20px;
             text-align: center;
+            color: #5dade2; /* Ændret tekstfarven */
         }
         table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
+            border-radius: 8px; /* Tilføjet afrundede hjørner */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Tilføjet skygge */
         }
         th, td {
-            padding: 10px;
+            padding: 12px; /* Ændret padding */
             text-align: left;
             border-bottom: 1px solid #ddd;
         }
         th {
             background-color: #f2f2f2;
+            color: #333; /* Ændret tekstfarven */
         }
         tr:hover {
             background-color: #f5f5f5;
         }
         button {
-            padding: 10px 20px;
-            background-color: #87CEEB;
+            padding: 12px 24px; /* Ændret padding */
+            background-color: #5dade2;
             color: white;
             border: none;
-            border-radius: 4px;
+            border-radius: 25px; /* Ændret radius */
             cursor: pointer;
+            transition: background-color 0.3s ease;
         }
         button:hover {
-            background-color: #00BFFF;
+            background-color: #3498db;
+        }
+        span.reserved {
+            color: #e74c3c; /* Ændret farven for reserveret besked */
         }
     </style>
 </head>
 <body>
-<h1><span th:text="${wishList.wishListHeader}"></span></h1>
+<div class="container">
+    <h1><span th:text="${wishList.wishListHeader}"></span></h1>
 
-<table>
-    <thead>
-    <tr>
-        <td>Header</td>
-        <td>Link</td>
-        <td>Price</td>
-        <td>Note</td>
-        <td>Reserve</td>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="wish : ${wishes}">
-        <td th:text="${wish.wishHeader}"></td>
-        <td th:text="${wish.wishLink}"></td>
-        <td th:text="${wish.wishPrice}"></td>
-        <td th:text="${wish.wishNote}"></td>
-        <td th:if="${wishes != null}">
-            <form action="/reserveWish" method="post">
-                <input type="hidden" name="wishId" th:value="${wish.wishId}">
-                <input type="hidden" name="sharedWishLists" th:value="${wishList.wishListId}">
-                <input type="hidden" name="id" th:value="${goBack.userId}"> <!-- "goBack" dårlig navngivning sorry-->
-                <button type="submit" th:if="${wish.isReserved == 0}">Reserve this wish!</button>
-                <!-- Add an alternative message or action if wish is already reserved -->
-                <span th:if="${wish.isReserved == 1}">Wish already reserved</span>
-            </form>
-        </td>
+    <table>
+        <thead>
+        <tr>
+            <td>Header</td>
+            <td>Link</td>
+            <td>Price</td>
+            <td>Note</td>
+            <td>Reserve</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="wish : ${wishes}">
+            <td th:text="${wish.wishHeader}"></td>
+            <td th:text="${wish.wishLink}"></td>
+            <td th:text="${wish.wishPrice}"></td>
+            <td th:text="${wish.wishNote}"></td>
+            <td th:if="${wishes != null}">
+                <form action="/reserveWish" method="post">
+                    <input type="hidden" name="wishId" th:value="${wish.wishId}">
+                    <input type="hidden" name="sharedWishLists" th:value="${wishList.wishListId}">
+                    <input type="hidden" name="id" th:value="${goBack.userId}">
+                    <button type="submit" th:if="${wish.isReserved == 0}">Reserve this wish!</button>
+                    <span class="reserved" th:if="${wish.isReserved == 1}">Wish already reserved</span>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 
-    </tr>
-    </tbody>
-</table>
-
-<br>
-<form action="/userWishList" method="get">
-    <input type="hidden" name="id" th:value="${goBack.userId}">
-    <button type="submit">Go back to your own profile!</button>
-</form>
-
-
+    <br>
+    <form action="/userWishList" method="get">
+        <input type="hidden" name="id" th:value="${goBack.userId}">
+        <button type="submit">Go back to your own profile!</button>
+    </form>
+</div>
 </body>
 </html>
